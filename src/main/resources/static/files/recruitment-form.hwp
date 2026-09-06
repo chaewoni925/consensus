@@ -1,0 +1,26 @@
+package com.example.demo.domain.joinus;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+
+@RestController
+public class JoinUsFileController {
+
+    @GetMapping("/api/join-us/form")
+    public ResponseEntity<Resource> downloadApplicationForm() throws IOException {
+        Resource resource = new ClassPathResource("static/files/recruitment-form.hwp");
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"recruitment-form.hwp\"")
+                .body(resource);
+    }
+}

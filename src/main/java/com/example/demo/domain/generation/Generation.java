@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.aspectj.weaver.Member;
+import com.example.demo.domain.member.Member;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;

@@ -46,6 +46,7 @@ public class Member {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+
     @Builder
     public Member(Generation generation, String name, String position,
                   String photoUrl, String instagram, String kakaoId, String intro) {

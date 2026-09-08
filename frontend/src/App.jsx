@@ -5,6 +5,7 @@ import ActivityPage from './pages/Activity/ActivityPage';
 import JoinUsPage from './pages/JoinUs/JoinUsPage.jsx';
 import ContactPage from './pages/Contact/ContactPage.jsx';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/join-us" element={<JoinUsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
   );
 }

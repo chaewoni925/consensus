@@ -33,72 +33,82 @@ function JoinUsPage() {
     ];
 
     return (
-        <main style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(44px,6vw,76px) clamp(16px,3vw,32px)', background: '#0B1021', color: '#F1F5F9' }}>
-            <div style={{ font: "500 10.5px 'JetBrains Mono',monospace", letterSpacing: '.2em', color: '#10B981' }}>JOIN US</div>
-            <h2 style={{ margin: '12px 0 0', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 'clamp(26px,3.6vw,40px)', color: '#F1F5F9' }}>컨센서스에 합류하기</h2>
-            <p style={{ margin: '12px 0 28px', maxWidth: '620px', fontSize: '14px', lineHeight: 1.7, color: '#94A3B8' }}>UIC 연합 가이드라인에 따라 가입 및 모집 소식을 전달해드립니다.</p>
-
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '22px' }}>
-                {tabs.map((label, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => setActiveTab(idx)}
-                        style={{
-                            padding: '10px 16px',
-                            borderRadius: '999px',
-                            font: "500 13px 'IBM Plex Sans KR',sans-serif",
-                            cursor: 'pointer',
-                            color: activeTab === idx ? '#04121b' : '#94A3B8',
-                            background: activeTab === idx ? '#10B981' : 'rgba(59,130,246,.07)',
-                            border: '1px solid ' + (activeTab === idx ? '#10B981' : 'rgba(59,130,246,.2)')
-                        }}
-                    >
-                        {label}
-                    </button>
-                ))}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '16px', alignItems: 'start' }}>
-                <div style={{ border: '1px solid rgba(59,130,246,.18)', borderRadius: '16px', background: '#0E162D', padding: 'clamp(18px,2.6vw,26px)' }}>
-                    <div style={{ font: "600 19px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9' }}>{panels[activeTab].title}</div>
-                    <p style={{ margin: '10px 0 22px', fontSize: '13px', lineHeight: 1.7, color: '#94A3B8' }}>{panels[activeTab].desc}</p>
-
-                    <form onSubmit={handleSubscribe} style={{ marginTop: '20px' }}>
-                        <label style={{ display: 'block', fontSize: '12px', color: '#94A3B8', marginBottom: '6px' }}>모집 알림 받을 이메일</label>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="example@email.com"
-                                required
-                                style={{ flex: 1, padding: '12px 14px', borderRadius: '9px', border: '1px solid rgba(148,163,184,.18)', background: '#0B1225', color: '#F1F5F9', outline: 'none' }}
-                            />
-                            <button type="submit" style={{ padding: '12px 20px', borderRadius: '9px', background: '#10B981', color: '#04121b', fontWeight: 600, border: 'none', cursor: 'pointer' }}>구독하기</button>
-                        </div>
-                    </form>
-                    {message && <p style={{ marginTop: '10px', fontSize: '13px', color: '#10B981' }}>{message}</p>}
-
-                    <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(148,163,184,.1)' }}>
-                        <a href={`${import.meta.env.VITE_API_BASE_URL || ''}/api/join-us/form`} style={{ display: 'inline-block', padding: '12px 18px', borderRadius: '8px', background: 'rgba(59,130,246,.15)', color: '#3B82F6', border: '1px solid rgba(59,130,246,.3)', textDecoration: 'none', fontWeight: 500, fontSize: '13px' }}>
-                            📥 공식 지원서 다운로드
-                        </a>
-                    </div>
+        <main style={{ minHeight: '100vh', padding: '150px 24px 100px', background: 'transparent', color: '#FFFFFF', boxSizing: 'border-box' }}>
+            <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+                <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                    <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>JOIN US</div>
+                    <h1 style={{ margin: 0, fontFamily: "'Pretendard', sans-serif", fontWeight: 800, fontSize: 'clamp(32px,4vw,44px)', letterSpacing: '-0.6px', color: '#FFFFFF' }}>RECRUITMENT</h1>
+                    <p style={{ margin: '14px auto 0', maxWidth: '620px', fontSize: '15px', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.75)', whiteSpace:'nowrap', wordBreak: 'keep-all' }}>
+                        UIC(전국대학교투자동아리연합회) 가이드라인에 따라 가입 절차 및 신입 기수 모집 알림을 안내해 드립니다.
+                    </p>
                 </div>
 
-                <div style={{ border: '1px solid rgba(59,130,246,.18)', borderRadius: '16px', background: '#0B1225', padding: 'clamp(18px,2.6vw,26px)' }}>
-                    <div style={{ font: "500 10px 'JetBrains Mono',monospace", letterSpacing: '.16em', color: '#64748B' }}>RECRUITING TIMELINE</div>
-                    <div style={{ marginTop: '18px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        {timeline.map((s, idx) => (
-                            <div key={idx} style={{ borderLeft: '2px solid rgba(16,185,129,.4)', paddingLeft: '12px' }}>
-                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '9px' }}>
-                                    <span style={{ font: "600 13.5px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9' }}>{s.title}</span>
-                                    <span style={{ fontSize: '10px', color: s.status === '마감' ? '#64748B' : '#10B981' }}>[{s.status}]</span>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '36px' }}>
+                    {tabs.map((label, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setActiveTab(idx)}
+                            style={{
+                                padding: '10px 22px',
+                                borderRadius: '30px',
+                                font: "600 14px 'Pretendard',sans-serif",
+                                cursor: 'pointer',
+                                color: activeTab === idx ? '#FFFFFF' : 'rgba(255,255,255,0.7)',
+                                background: activeTab === idx ? 'linear-gradient(90deg, rgba(157,196,238,0.25), rgba(157,196,238,0.15))' : 'rgba(255,255,255,0.05)',
+                                border: '1px solid ' + (activeTab === idx ? '#9DC4EE' : 'rgba(255,255,255,0.15)'),
+                                boxShadow: activeTab === idx ? '0 0 16px rgba(157,196,238,0.2)' : 'none',
+                                transition: 'all 0.25s ease'
+                            }}
+                        >
+                            {label}
+                        </button>
+                    ))}
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '24px', alignItems: 'stretch' }}>
+                    {/* Left Panel - Application & Subscription */}
+                    <div style={{ border: '1px solid rgba(255,255,255,0.16)', borderRadius: '16px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', padding: 'clamp(24px,3vw,36px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                        <div>
+                            <div style={{ font: "800 20px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '12px' }}>{panels[activeTab].title}</div>
+                            <p style={{ margin: '0 0 28px', fontSize: '14.5px', lineHeight: 1.75, color: 'rgba(255,255,255,0.75)', wordBreak: 'keep-all' }}>{panels[activeTab].desc}</p>
+
+                            <form onSubmit={handleSubscribe} style={{ marginTop: '24px' }}>
+                                <label style={{ display: 'block', font: "600 12px 'Pretendard',sans-serif", color: '#9DC4EE', marginBottom: '8px', letterSpacing: '0.05em' }}>모집 알림 받을 이메일</label>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="example@email.com"
+                                        required
+                                        style={{ flex: 1, padding: '12px 16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.25)', color: '#FFFFFF', outline: 'none', font: "14px 'Pretendard',sans-serif" }}
+                                    />
+                                    <button type="submit" style={{ padding: '12px 22px', borderRadius: '10px', background: '#9DC4EE', color: '#0C1526', fontWeight: 700, border: 'none', cursor: 'pointer', font: "14px 'Pretendard',sans-serif", transition: 'all 0.2s ease' }}>구독하기</button>
                                 </div>
-                                <div style={{ marginTop: '4px', font: "400 11.5px 'JetBrains Mono',monospace", color: '#64748B' }}>{s.when}</div>
-                                <div style={{ marginTop: '4px', fontSize: '12px', color: '#94A3B8' }}>{s.desc}</div>
-                            </div>
-                        ))}
+                            </form>
+                            {message && <p style={{ marginTop: '12px', fontSize: '13.5px', color: '#9DC4EE', fontWeight: 600 }}>{message}</p>}
+                        </div>
+
+                        <div style={{ marginTop: '36px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+                            <a href={`${import.meta.env.VITE_API_BASE_URL || ''}/api/join-us/form`} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', borderRadius: '10px', background: 'rgba(157,196,238,0.14)', color: '#FFFFFF', border: '1px solid rgba(157,196,238,0.3)', textDecoration: 'none', fontWeight: 600, fontSize: '14px', transition: 'all 0.25s ease' }}>
+                                📥 공식 지원서 다운로드
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Right Panel - Timeline */}
+                    <div style={{ border: '1px solid rgba(255,255,255,0.16)', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(10px)', padding: 'clamp(24px,3vw,36px)' }}>
+                        <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '3px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '24px' }}>RECRUITING TIMELINE</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                            {timeline.map((s, idx) => (
+                                <div key={idx} style={{ borderLeft: '2px solid #9DC4EE', paddingLeft: '16px', position: 'relative' }}>
+                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+                                        <span style={{ font: "700 15px 'Pretendard',sans-serif", color: '#FFFFFF' }}>{s.title}</span>
+                                    </div>
+                                    <div style={{ marginTop: '6px', fontSize: '13.5px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{s.desc}</div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

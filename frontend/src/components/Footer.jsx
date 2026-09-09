@@ -56,7 +56,7 @@ function Footer() {
                             Contact Us
                         </span>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             {/* Email Link */}
                             <a
                                 href={CONTACT_INFO.email}
@@ -65,16 +65,16 @@ function Footer() {
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '34px',
-                                    height: '34px',
-                                    borderRadius: '8px',
-                                    background: 'rgba(59,130,246,.08)',
-                                    border: '1px solid rgba(59,130,246,.2)',
+                                    width: '44px',
+                                    height: '44px',
+                                    borderRadius: '10px',
+                                    background: 'rgba(59,130,246,.12)',
+                                    border: '1px solid rgba(59,130,246,.3)',
                                     color: '#CBD5E1',
                                     transition: 'all .2s ease'
                                 }}
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <rect x="2" y="4" width="20" height="16" rx="2" />
                                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                                 </svg>
@@ -90,16 +90,16 @@ function Footer() {
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '34px',
-                                    height: '34px',
-                                    borderRadius: '8px',
-                                    background: 'rgba(59,130,246,.08)',
-                                    border: '1px solid rgba(59,130,246,.2)',
+                                    width: '44px',
+                                    height: '44px',
+                                    borderRadius: '10px',
+                                    background: 'rgba(59,130,246,.12)',
+                                    border: '1px solid rgba(59,130,246,.3)',
                                     color: '#CBD5E1',
                                     transition: 'all .2s ease'
                                 }}
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -116,17 +116,21 @@ function Footer() {
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '34px',
-                                    height: '34px',
-                                    borderRadius: '8px',
-                                    background: 'rgba(59,130,246,.08)',
-                                    border: '1px solid rgba(59,130,246,.2)',
+                                    width: '44px',
+                                    height: '44px',
+                                    borderRadius: '10px',
+                                    background: 'rgba(59,130,246,.12)',
+                                    border: '1px solid rgba(59,130,246,.3)',
                                     color: '#CBD5E1',
                                     transition: 'all .2s ease'
                                 }}
                             >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M16.273 12.845L7.376 0H0v24h7.726v-12.845L16.624 24H24V0h-7.727v12.845z" />
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                                    <line x1="6" y1="1" x2="6" y2="4" />
+                                    <line x1="10" y1="1" x2="10" y2="4" />
+                                    <line x1="14" y1="1" x2="14" y2="4" />
                                 </svg>
                             </a>
                         </div>

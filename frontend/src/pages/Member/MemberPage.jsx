@@ -3,6 +3,7 @@ import axiosInstance from '../../api/axiosInstance';
 
 function MemberPage() {
     const [members, setMembers] = useState([]);
+    const [activeHoverStep, setActiveHoverStep] = useState(null); // No modal shown by default
 
     useEffect(() => {
         axiosInstance.get('/api/members')
@@ -28,83 +29,125 @@ function MemberPage() {
         bullets: ['한화엔진 · HPSP 리서치 참여', '학회원 만족도 점검 · 소통 창구'] }
     ];
 
-    const rawTeams = [
-      { name: '리서치 1팀', dept: 'EQUITY RESEARCH', color: '#10B981', members: ['이서원', '송찬우', '전우탁', '유민아', '김서현', '최예린'] },
-      { name: '리서치 2팀', dept: 'EQUITY RESEARCH', color: '#10B981', members: ['김하은', '소민준', '이재우', '최울', '정예슬', '박성빈'] },
-      { name: '리서치 3팀', dept: 'EQUITY RESEARCH', color: '#10B981', members: ['임윤희', '권민규', '신재현', '서채원', '송민주', '양유나'] },
-      { name: '매크로 · 투자운용팀', dept: 'MACRO & FUND', color: '#3B82F6', members: ['김정훈', '심윤기', '김민아', '최주연', '유영인', '강민영', '김민선'] }
-    ];
-
     const depts = [
-      { name: '기업리서치 부', code: 'EQUITY', color: '#10B981',
-        lines: ['산업 섹터별 기업 선정', 'Top-down + Bottom-up 관점의 적정주가 산출', '투자포인트 및 리스크 요인 도출'],
+      { name: '기업리서치 부', tag: 'EQUITY', color: '#9DC4EE',
+        bullets: ['산업 섹터별 기업 선정', 'Top-down + Bottom-up 관점의 적정주가 산출', '투자포인트 및 리스크 요인 도출'],
         outputs: ['기업분석 리포트', 'Valuation 모델', '투자제안서'] },
-      { name: '매크로 컨센서스 부', code: 'MACRO', color: '#3B82F6',
-        lines: ['거시경제 동향 분석 기반 House-View 구축', '1억 규모 모의펀드 운용', '투자전략 및 리밸런싱 의사결정'],
+      { name: '매크로 컨센서스 부', tag: 'MACRO', color: '#9DC4EE',
+        bullets: ['거시경제 동향 분석 기반 House-View 구축', '1억 규모 모의펀드 운용', '투자전략 및 리밸런싱 의사결정'],
         outputs: ['House View 리포트', '투자운용보고서', '리밸런싱 제안서'] },
-      { name: '투자심의위원회', code: 'IC', color: '#A78BFA',
-        lines: ['선배 기수 중심 투자 검토 조직', '투자제안의 타당성 질의 · 검토', '포트폴리오 편입 / 보류 / 재심의 결정'],
+      { name: '투자심의위원회', tag: 'IC', color: '#9DC4EE',
+        bullets: ['선배 기수 중심 투자 검토 조직', '투자제안의 타당성 질의·검토', '포트폴리오 편입 / 보류 / 재심의 결정'],
         outputs: ['투자심의 의결 회의록', '사후 모니터링 기준'] }
     ];
 
-    return (
-        <main style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(20px, 3vw, 40px) clamp(16px,3vw,32px)', background: '#0B1021', color: '#F1F5F9' }}>
-            <div style={{ font: "500 10.5px 'JetBrains Mono',monospace", letterSpacing: '.2em', color: '#10B981', textAlign:'center' }}>MEMBER</div>
-            <h2 style={{ margin: '12px 0 0', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 'clamp(26px,3.6vw,40px)', letterSpacing: '-.02em', color: '#F1F5F9', textAlign:'center' }}>5기 임원진</h2>
-            <p style={{ margin: '12px auto 30px', maxWidth: '600px', fontSize: '14px', lineHeight: 1.7, color: '#94A3B8', textAlign: 'center' }}>CONSENSUS를 이끌어가는 5기 임원진입니다.</p>
+    const pipelineSteps = [
+      {
+        num: 1,
+        title: '기업리서치 부',
+        sub: '적정주가 및 투자포인트 도출',
+        tipTitle: '기업리서치 부 — Equity Research',
+        bullets: ['산업 섹터별 기업 선정', 'Top-down + Bottom-up 적정주가 산출', '투자포인트 및 리스크 요인 도출'],
+        outputs: ['기업분석 리포트', 'Valuation 모델', '투자제안서']
+      },
+      {
+        num: 2,
+        title: '매크로 컨센서스 부',
+        sub: 'House-View 기반 포트폴리오 제안',
+        tipTitle: '매크로 컨센서스 부 — Macro Research',
+        bullets: ['거시경제 동향 분석 기반 House-View 구축', '1억 규모 모의펀드 운용', '투자전략 및 리밸런싱 의사결정'],
+        outputs: ['House View 리포트', '투자운용보고서', '리밸런싱 제안서']
+      },
+      {
+        num: 3,
+        title: '투자심의위원회',
+        sub: '타당성 검토 및 편입 의결',
+        tipTitle: '투자심의위원회 — Investment Committee',
+        bullets: ['선배 기수 중심 투자 검토 조직', '투자제안의 타당성 질의·검토', '포트폴리오 편입 / 보류 / 재심의 결정'],
+        outputs: ['투자심의 의결 회의록', '사후 모니터링 기준']
+      },
+      {
+        num: 4,
+        title: 'Consensus Portfolio',
+        sub: '최종 편입 및 리밸런싱',
+        tipTitle: 'Consensus Portfolio — 최종 편입',
+        bullets: ['기업리서치·매크로 제안이 최종 반영된\n학회 공식 포트폴리오', '분기별 리밸런싱 및 투자 결과 보고'],
+        outputs: ['투자운용결과보고서', '분기 리밸런싱 기록']
+      }
+    ];
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '16px', width: '100%' }}>
+    return (
+        <main style={{ maxWidth: '1180px', margin: '0 auto', padding: '160px 24px 130px', background: 'transparent', color: '#FFFFFF' }}>
+            {/* Header Title */}
+            <div style={{ textAlign: 'center', marginBottom: '48px', marginTop: '20px' }}>
+                <div style={{ font: "800 20px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>MEMBER & ORGANIZATION</div>
+                <h2 style={{ margin: '0 0 12px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(28px,4vw,40px)', letterSpacing: '-.02em', color: '#FFFFFF' }}>5기 임원진</h2>
+                <p style={{ margin: '0 auto', maxWidth: '600px', fontSize: '14.5px', lineHeight: 1.7, color: 'rgba(255,255,255,0.72)' }}>CONSENSUS를 이끌어가는 5기 임원진입니다.</p>
+            </div>
+
+            {/* Executives Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', width: '100%', marginBottom: '90px' }}>
                 {exec.map((m, idx) => (
-                    <div key={idx} style={{ position: 'relative', border: '1px solid rgba(59,130,246,.18)', borderRadius: '14px', background: '#0E162D', overflow: 'hidden', padding: '16px' }}>
-                        {/* 프로필 사진 영역 (추후 이미지 적용 가능) */}
+                    <div key={idx} style={{ position: 'relative', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', background: 'rgba(255,255,255,0.05)', overflow: 'hidden', padding: '20px' }}>
                         <div style={{
                             width: '100%',
                             aspectRatio: '1 / 1',
                             borderRadius: '10px',
                             background: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px dashed rgba(148, 163, 184, 0.25)',
+                            border: '1px dashed rgba(255, 255, 255, 0.2)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: '#64748B',
+                            color: 'rgba(255,255,255,0.5)',
                             fontSize: '12px',
                             marginBottom: '14px'
                         }}>
-                            {/* 추후 <img src="..." alt={m.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} /> 적용 */}
                             Profile Image
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px' }}>
-                            <div style={{ font: "600 16px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9' }}>{m.name}</div>
-                            <div style={{ font: "400 9.5px 'JetBrains Mono',monospace", color: '#475569' }}>{m.cohort}</div>
+                            <div style={{ font: "800 16px 'Pretendard',sans-serif", color: '#FFFFFF' }}>{m.name}</div>
+                            <div style={{ font: "600 10px 'JetBrains Mono',monospace", color: '#9DC4EE' }}>{m.cohort}</div>
                         </div>
-                        <div style={{ marginTop: '6px', display: 'inline-flex', padding: '3px 9px', borderRadius: '6px', background: 'rgba(16,185,129,.1)', border: '1px solid rgba(16,185,129,.28)', font: "600 10.5px 'IBM Plex Sans KR',sans-serif", color: '#10B981' }}>{m.role}</div>
-                        <div style={{ marginTop: '11px', fontSize: '11.5px', color: '#64748B' }}>{m.major}</div>
+                        <div style={{ marginTop: '6px', display: 'inline-flex', padding: '4px 10px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', border: '1px solid rgba(157,196,238,0.3)', font: "700 11px 'Pretendard',sans-serif", color: '#C9E0FA' }}>{m.role}</div>
+                        <div style={{ marginTop: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>{m.major}</div>
                     </div>
                 ))}
             </div>
 
-            {/* 활동 부서 Section */}
-            <div style={{ marginTop: 'clamp(44px,6vw,68px)' }}>
-                <h3 style={{ margin: '0 0 6px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 'clamp(22px,2.8vw,32px)', color: '#F1F5F9' }}>활동 부서</h3>
-                <p style={{ margin: '0 0 24px', fontSize: '14px', lineHeight: 1.7, color: '#94A3B8' }}>기업·매크로 분석 결과가 투자제안으로, 투자심의위원회 의결을 거쳐 Consensus Portfolio에 편입됩니다.</p>
+            {/* 활동 부서 Section (Exact HTML Design) */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.16)', paddingTop: '80px', marginBottom: '90px' }}>
+                <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', marginBottom: '18px' }}>ACTIVITIES</div>
+                <h1 style={{ fontSize: 'clamp(32px,4vw,40px)', fontWeight: 800, letterSpacing: '-0.6px', marginBottom: '16px', color: '#FFFFFF' }}>활동 부서</h1>
+                <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, whiteSpace: 'normal', marginBottom: '60px' }}>
+                    기업·매크로 분석 결과가 투자제안으로 이어지고, 투자심의위원회 의결을 거쳐 Consensus Portfolio에 편입됩니다.
+                </p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(292px,1fr))', gap: '16px' }}>
+                {/* 3 Department Cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '22px' }}>
                     {depts.map((d, idx) => (
-                        <div key={idx} style={{ display: 'flex', flexDirection: 'column', border: '1px solid rgba(59,130,246,.18)', borderRadius: '16px', background: '#0E162D', overflow: 'hidden' }}>
-                            <div style={{ height: '3px', background: `linear-gradient(90deg, ${d.color}, transparent)` }}></div>
-                            <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
-                                    <div style={{ font: "600 18px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9' }}>{d.name}</div>
-                                    <span style={{ flex: 'none', padding: '4px 9px', borderRadius: '6px', font: "600 10px 'JetBrains Mono',monospace", color: d.color, background: d.color + '1a', border: '1px solid ' + d.color + '3d' }}>{d.code}</span>
+                        <div key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ height: '3px', width: '100%', background: '#9DC4EE' }} />
+                            <div style={{ padding: '26px 24px 28px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                                    <div style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF' }}>{d.name}</div>
+                                    <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '0.5px', padding: '5px 11px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', color: '#C9E0FA', fontFamily: "'JetBrains Mono', monospace" }}>{d.tag}</div>
                                 </div>
-                                <div style={{ marginTop: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    {d.lines.map((l, lIdx) => (
-                                        <div key={lIdx} style={{ display: 'flex', gap: '9px', fontSize: '13px', lineHeight: 1.6, color: '#CBD5E1' }}>
-                                            <span style={{ color: '#10B981', fontFamily: "'JetBrains Mono',monospace" }}>→</span>
-                                            <span>{l}</span>
-                                        </div>
+                                <ul style={{ listStyle: 'none', margin: '0 0 22px 0', padding: 0 }}>
+                                    {d.bullets.map((b, bIdx) => (
+                                        <li key={bIdx} style={{ display: 'flex', gap: '9px', fontSize: '13px', color: 'rgba(255,255,255,0.78)', lineHeight: 1.6, marginBottom: '11px' }}>
+                                            <span style={{ color: '#9DC4EE', fontWeight: 700 }}>→</span>
+                                            <span>{b}</span>
+                                        </li>
                                     ))}
+                                </ul>
+                                <div style={{ marginTop: 'auto', borderTop: '1px dashed rgba(255,255,255,0.18)', paddingTop: '18px' }}>
+                                    <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '1.4px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>핵심 산출물</div>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                        {d.outputs.map((out, oIdx) => (
+                                            <span key={oIdx} style={{ fontSize: '11.5px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)', padding: '6px 12px', borderRadius: '20px' }}>{out}</span>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,39 +155,96 @@ function MemberPage() {
                 </div>
             </div>
 
-            {/*{members.length > 0 && (*/}
-            {/*    <div style={{ marginTop: '40px' }}>*/}
-            {/*        <h3 style={{ color: '#F1F5F9' }}>백엔드 등록 임원진 목록</h3>*/}
-            {/*        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', gap: '12px', marginTop: '12px' }}>*/}
-            {/*            {members.map((member) => (*/}
-            {/*                <div key={member.id} style={{ background: '#0E162D', padding: '12px', borderRadius: '8px', border: '1px solid rgba(59,130,246,.2)' }}>*/}
-            {/*                    <p style={{ fontWeight: 600, color: '#F1F5F9' }}>{member.name} - {member.position}</p>*/}
-            {/*                    <p style={{ fontSize: '12px', color: '#94A3B8', marginTop: '4px' }}>{member.intro}</p>*/}
-            {/*                </div>*/}
-            {/*            ))}*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            {/* Interactive Decision Pipeline Stepper Section */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.16)', paddingTop: '80px' }}>
+                <div style={{ fontSize: '11.5px', fontWeight: 800, letterSpacing: '3px', color: '#9DC4EE', marginBottom: '10px' }}>DECISION PIPELINE</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.4px', marginBottom: '56px', color: '#FFFFFF' }}>분석에서 편입까지, 하나의 흐름</div>
 
-            {/*<h3 style={{ margin: 'clamp(44px,6vw,68px) 0 6px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, fontSize: 'clamp(20px,2.6vw,28px)', color: '#F1F5F9' }}>5기 활동 조 편성</h3>*/}
-            {/*<p style={{ margin: '0 0 24px', fontSize: '13.5px', color: '#94A3B8' }}>기업리서치 부 3팀, 매크로 컨센서스 부 1팀 · 총 25명</p>*/}
-            {/*<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: '16px' }}>*/}
-            {/*    {rawTeams.map((t, idx) => (*/}
-            {/*        <div key={idx} style={{ border: '1px solid rgba(59,130,246,.16)', borderRadius: '14px', background: '#0E162D', overflow: 'hidden' }}>*/}
-            {/*            <div style={{ padding: '13px 16px', borderBottom: '1px solid rgba(148,163,184,.12)', font: "600 13.5px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9', background: `linear-gradient(90deg, ${t.color}1f, transparent)` }}>*/}
-            {/*                {t.name}*/}
-            {/*            </div>*/}
-            {/*            <div style={{ padding: '8px 16px 12px' }}>*/}
-            {/*                {t.members.map((name, mIdx) => (*/}
-            {/*                    <div key={mIdx} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '6px 0', borderBottom: '1px solid rgba(148,163,184,.05)' }}>*/}
-            {/*                        <span style={{ fontSize: '13px', color: '#E2E8F0' }}>{name}</span>*/}
-            {/*                        {mIdx === 0 && <span style={{ marginLeft: 'auto', padding: '2px 7px', borderRadius: '5px', font: "600 9.5px 'IBM Plex Sans KR',sans-serif", color: t.color, background: t.color + '1a', border: '1px solid ' + t.color + '40' }}>팀장</span>}*/}
-            {/*                    </div>*/}
-            {/*                ))}*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    ))}*/}
-            {/*</div>*/}
+                <div style={{ position: 'relative', marginTop: '40px' }}>
+                    {/* Connecting Line */}
+                    <div style={{ position: 'absolute', top: '19px', left: '40px', right: '40px', height: '1px', background: 'rgba(255,255,255,0.22)', zIndex: 0 }} />
+
+                    <div style={{ display: 'flex', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                        {pipelineSteps.map((step, sIdx) => {
+                            const isHovered = activeHoverStep === sIdx;
+                            return (
+                                <div
+                                    key={sIdx}
+                                    onMouseEnter={() => setActiveHoverStep(sIdx)}
+                                    onMouseLeave={() => setActiveHoverStep(null)}
+                                    style={{ flex: 1, textAlign: 'center', position: 'relative', cursor: 'pointer' }}
+                                >
+                                    <div style={{
+                                        width: '38px',
+                                        height: '38px',
+                                        borderRadius: '50%',
+                                        background: isHovered ? '#9DC4EE' : 'rgba(255,255,255,0.08)',
+                                        border: isHovered ? '1.5px solid #9DC4EE' : '1.5px solid rgba(255,255,255,0.3)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        margin: '0 auto 16px',
+                                        fontSize: '14px',
+                                        fontWeight: 800,
+                                        color: isHovered ? '#0C1526' : 'rgba(255,255,255,0.65)',
+                                        boxShadow: isHovered ? '0 0 0 5px rgba(157,196,238,0.22)' : 'none',
+                                        transition: 'all 0.2s ease'
+                                    }}>
+                                        {step.num}
+                                    </div>
+                                    <div style={{ fontSize: '13.5px', fontWeight: 700, marginBottom: '6px', color: isHovered ? '#9DC4EE' : '#FFFFFF', transition: 'color 0.2s ease' }}>
+                                        {step.title}
+                                    </div>
+                                    <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, padding: '0 8px' }}>
+                                        {step.sub}
+                                    </div>
+
+                                    {/* Tooltip Card */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '110px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '360px',
+                                        background: '#16233B',
+                                        border: '1px solid rgba(255,255,255,0.18)',
+                                        borderRadius: '12px',
+                                        padding: '20px 20px 18px',
+                                        textAlign: 'left',
+                                        boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
+                                        opacity: isHovered ? 1 : 0,
+                                        visibility: isHovered ? 'visible' : 'hidden',
+                                        transition: 'all 0.2s ease',
+                                        zIndex: 10,
+                                        whiteSpace: 'normal',
+                                        wordBreak: 'keep-all'
+                                    }}>
+                                        <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%) rotate(45deg)', width: '12px', height: '12px', background: '#16233B', borderLeft: '1px solid rgba(255,255,255,0.18)', borderTop: '1px solid rgba(255,255,255,0.18)' }} />
+                                        <div style={{ fontSize: '13.5px', fontWeight: 800, marginBottom: '12px', color: '#FFFFFF', whiteSpace: 'nowrap' }}>{step.tipTitle}</div>
+                                        <ul style={{ listStyle: 'none', margin: '0 0 14px 0', padding: 0 }}>
+                                            {step.bullets.map((b, bIdx) => (
+                                                <li key={bIdx} style={{ display: 'flex', gap: '7px', fontSize: '12px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.55, marginBottom: '7px', whiteSpace: 'pre-line' }}>
+                                                    <span style={{ color: '#9DC4EE', fontWeight: 700 }}>→</span>
+                                                    <span>{b}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingTop: '12px', borderTop: '1px dashed rgba(255,255,255,0.14)' }}>
+                                            {step.outputs.map((out, oIdx) => (
+                                                <span key={oIdx} style={{ fontSize: '10.5px', fontWeight: 600, color: 'rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', padding: '4px 10px', borderRadius: '16px' }}>{out}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/*<div style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '220px' }}>*/}
+                {/*    각 단계에 마우스를 올리면 상세 활동이 나타납니다*/}
+                {/*</div>*/}
+            </div>
         </main>
     );
 }

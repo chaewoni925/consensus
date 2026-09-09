@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import MemberPage from './pages/Member/MemberPage';
@@ -8,6 +9,28 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 function App() {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Check for PageDown (or Space) / PageUp key pressed
+      if (e.key === 'PageDown' || e.code === 'PageDown') {
+        e.preventDefault();
+        window.scrollBy({
+          top: window.innerHeight * 0.85,
+          behavior: 'smooth'
+        });
+      } else if (e.key === 'PageUp' || e.code === 'PageUp') {
+        e.preventDefault();
+        window.scrollBy({
+          top: -window.innerHeight * 0.85,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
       <BrowserRouter>
         <Navbar />

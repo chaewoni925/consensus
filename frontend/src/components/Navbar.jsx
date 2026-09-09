@@ -57,11 +57,9 @@ function Navbar() {
           transition: 'height 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {/* Brand Logo with Neon Glow & Hover Scale */}
+        {/* Brand Logo */}
         <Link
           to="/"
-          onMouseEnter={() => setIsLogoHovered(true)}
-          onMouseLeave={() => setIsLogoHovered(false)}
           style={{
             position: 'relative',
             display: 'flex',
@@ -72,26 +70,6 @@ function Navbar() {
             transition: 'gap 0.35s ease'
           }}
         >
-          {/* Backdrop Glow Filter */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '18px',
-              transform: 'translate(-50%, -50%)',
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(16, 185, 129, 0.65) 0%, rgba(59, 130, 246, 0.45) 55%, transparent 75%)',
-              filter: 'blur(14px)',
-              opacity: isLogoHovered ? 1 : 0,
-              scale: isLogoHovered ? 1.25 : 0.8,
-              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              pointerEvents: 'none',
-              zIndex: 0
-            }}
-          />
-
           {/* Logo Image */}
           <div
             style={{
@@ -99,11 +77,7 @@ function Navbar() {
               zIndex: 1,
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              filter: isLogoHovered
-                ? 'drop-shadow(0 0 16px rgba(16, 185, 129, 0.9)) drop-shadow(0 0 28px rgba(59, 130, 246, 0.7))'
-                : 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.2))',
-              transition: 'all 0.35s ease'
+              justifyContent: 'center'
             }}
           >
             <img
@@ -118,7 +92,7 @@ function Navbar() {
             />
           </div>
 
-          {/* Brand Text & Since 2024 Pill */}
+          {/* Brand Text */}
           <div
             style={{
               position: 'relative',
@@ -130,12 +104,11 @@ function Navbar() {
           >
             <span
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Pretendard', sans-serif",
                 fontWeight: 800,
                 fontSize: isScrolled ? '20px' : '24px',
                 letterSpacing: '-.03em',
-                color: isLogoHovered ? '#FFFFFF' : '#F8FAFC',
-                textShadow: isLogoHovered ? '0 0 12px rgba(16, 185, 129, 0.5)' : 'none',
+                color: '#F8FAFC',
                 transition: 'all 0.35s ease'
               }}
             >
@@ -163,7 +136,7 @@ function Navbar() {
         </Link>
 
         {/* Navigation Items */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px', marginLeft: 'auto' }}>
           {navItems.map((item) => {
             const active = location.pathname === item.path;
             return (
@@ -171,18 +144,28 @@ function Navbar() {
                 key={item.path}
                 to={item.path}
                 style={{
-                  padding: isScrolled ? '6px 14px' : '8px 18px',
-                  borderRadius: '10px',
-                  font: '600 13.5px "IBM Plex Sans KR", sans-serif',
-                  transition: 'all .25s ease',
-                  color: active ? '#FFFFFF' : '#10B981',
-                  background: active ? '#10B981' : 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid ' + (active ? '#10B981' : 'rgba(16, 185, 129, 0.45)'),
+                  fontFamily: "'Pretendard', sans-serif",
+                  fontWeight: active ? 800 : 700,
+                  fontSize: isScrolled ? '15px' : '16px',
+                  letterSpacing: '0.06em',
+                  color: '#FFFFFF',
+                  textTransform: 'uppercase',
                   textDecoration: 'none',
-                  boxShadow: active ? '0 0 20px rgba(16, 185, 129, 0.5)' : '0 2px 10px rgba(0, 0, 0, 0.3)',
-                  backdropFilter: 'blur(8px)',
-                  WebkitBackdropFilter: 'blur(8px)',
-                  textShadow: active ? 'none' : '0 0 8px rgba(16, 185, 129, 0.3)'
+                  opacity: active ? 1 : 0.9,
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
+                  transition: 'all 0.25s ease',
+                  position: 'relative',
+                  padding: '4px 0'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '1';
+                  e.currentTarget.style.textShadow = '0 2px 12px rgba(255, 255, 255, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.opacity = '0.9';
+                    e.currentTarget.style.textShadow = '0 2px 8px rgba(0, 0, 0, 0.7)';
+                  }
                 }}
               >
                 {item.label}

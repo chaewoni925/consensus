@@ -131,7 +131,7 @@ function InteractiveLogo3D() {
           <div style={{ textAlign: 'center', transform: 'translateZ(30px)' }}>
             <span
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Pretendard', sans-serif",
                 fontWeight: 800,
                 fontSize: '22px',
                 letterSpacing: '-.02em',

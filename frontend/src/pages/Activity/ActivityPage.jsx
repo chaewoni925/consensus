@@ -256,16 +256,16 @@ function ActivityPage() {
       });
 
   return (
-    <div style={{ background: '#111726', color: '#F1F5F9', minHeight: '100vh', fontFamily: "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+    <div style={{ background: 'transparent', color: '#F1F5F9', minHeight: '100vh', fontFamily: "'Pretendard', sans-serif" }}>
       <Header navbarShadow />
 
-      <main style={{ background: '#111726', color: '#F1F5F9', minHeight: '100vh' }}>
+      <main style={{ background: 'transparent', color: '#F1F5F9', minHeight: '100vh' }}>
         {/* 1st Viewport Section: Research -> Proposal -> Approval with Scroll Down Indicator */}
-        <section style={{ position: 'relative', minHeight: '100vh', maxWidth: '1440px', margin: '0 auto', padding: '120px clamp(16px, 3vw, 48px) 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box', borderBottom: '1px solid #1E2A44' }}>
+        <section style={{ position: 'relative', minHeight: '100vh', maxWidth: '1440px', margin: '0 auto', padding: '120px clamp(16px, 3vw, 48px) 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box', borderBottom: '1px solid rgba(255, 255, 255, 0.14)' }}>
             <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <h1 style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '3px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '14px' }}>PROCESS</h1>
 
-                <h2 style={{ margin: 0, fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(24px,3.8vw,45px)', letterSpacing: '-.025em', color: '#F1F5F9', whiteSpace: 'nowrap' }}>
+                <h2 style={{ margin: 0, fontFamily: "'Pretendard', sans-serif", fontWeight: 700, fontSize: 'clamp(24px,3.8vw,45px)', letterSpacing: '-.025em', color: '#F1F5F9', whiteSpace: 'nowrap' }}>
                     Research → Proposal → Approval
                 </h2>
                 <p style={{ margin: '16px auto 0', maxWidth: '800px', fontSize: 'clamp(14px,1.6vw,17px)', lineHeight: 1.75, color: '#94A3B8', wordBreak: 'keep-all', textAlign: 'center' }}>
@@ -273,7 +273,7 @@ function ActivityPage() {
                 </p>
             </div>
 
-            <div style={{ width: '100%', marginTop: 'clamp(28px,3.5vw,48px)', border: '1px solid #22304C', borderRadius: '20px', background: 'rgba(22, 31, 51, 0.75)', padding: 'clamp(24px,3.5vw,36px)', boxShadow: '0 10px 30px rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}>
+            <div style={{ width: '100%', marginTop: 'clamp(28px,3.5vw,48px)', border: '1px solid rgba(255, 255, 255, 0.16)', borderRadius: '20px', background: 'rgba(255, 255, 255, 0.03)', padding: 'clamp(24px,3.5vw,36px)', boxShadow: '0 10px 30px rgba(0,0,0,0.2)', backdropFilter: 'blur(8px)' }}>
                 <div style={{ font: "600 11px 'Pretendard', sans-serif", letterSpacing: '.22em', color: '#3B82F6', textTransform: 'uppercase', textAlign: 'center' }}>
                     DECISION PIPELINE PROCESS
                 </div>
@@ -288,8 +288,8 @@ function ActivityPage() {
                                 style={{
                                     padding: '24px 20px',
                                     borderRadius: '14px',
-                                    background: isHovered ? 'rgba(16, 185, 129, 0.06)' : 'rgba(27, 38, 62, 0.6)',
-                                    border: '1px solid ' + (isHovered ? 'rgba(16,185,129,.7)' : 'rgba(39, 54, 86, 0.8)'),
+                                    background: isHovered ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.04)',
+                                    border: '1px solid ' + (isHovered ? 'rgba(16, 185, 129, 0.7)' : 'rgba(255, 255, 255, 0.12)'),
                                     boxShadow: isHovered ? '0 6px 24px rgba(16,185,129,.25)' : 'none',
                                     transform: isHovered ? 'translateY(-4px)' : 'none',
                                     cursor: 'pointer',
@@ -297,7 +297,7 @@ function ActivityPage() {
                                 }}
                             >
                                 <div style={{ font: "600 10.5px 'Pretendard', sans-serif", letterSpacing: '.16em', color: isHovered ? '#10B981' : '#3B82F6', transition: 'color 0.2s ease' }}>{p.step}</div>
-                                <div style={{ marginTop: '12px', font: "600 16px 'IBM Plex Sans KR',sans-serif", color: '#F1F5F9', letterSpacing: '-.01em' }}>{p.title}</div>
+                                <div style={{ marginTop: '12px', font: "600 16px 'Pretendard', sans-serif", color: '#F1F5F9', letterSpacing: '-.01em' }}>{p.title}</div>
                                 <div style={{ marginTop: '8px', fontSize: '13px', lineHeight: 1.6, color: '#94A3B8', whiteSpace: 'nowrap' }}>{p.desc}</div>
                             </div>
                         );
@@ -335,7 +335,7 @@ function ActivityPage() {
                             borderRadius: '12px',
                             background: '#2563EB',
                             color: '#FFFFFF',
-                            fontFamily: "'Inter', sans-serif",
+                            fontFamily: "'Pretendard', sans-serif",
                             fontWeight: 600,
                             fontSize: '14px',
                             border: 'none',

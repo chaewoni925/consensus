@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../../api/axiosInstance';
+import ScrollIndicator from '../../components/ScrollIndicator';
 
 function MemberPage() {
     const [members, setMembers] = useState([]);
@@ -83,7 +84,7 @@ function MemberPage() {
                 {/* Header Title */}
                 <div style={{ textAlign: 'center', marginBottom: '48px', marginTop: '5px' }}>
                     <div style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>MEMBER & ORGANIZATION</div>
-                    <h2 style={{ margin: '0 0 12px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(28px,4vw,40px)', letterSpacing: '-.02em', color: '#FFFFFF' }}>5기 임원진</h2>
+                    <h2 style={{ margin: '0 0 12px', fontFamily: "'Pretendard', sans-serif", fontWeight: 800, fontSize: 'clamp(28px,4vw,40px)', letterSpacing: '-.02em', color: '#FFFFFF' }}>5기 임원진</h2>
                     <p style={{ margin: '0 auto', maxWidth: '600px', fontSize: '14.5px', lineHeight: 1.7, color: 'rgba(255,255,255,0.72)' }}>CONSENSUS를 이끌어가는 5기 임원진입니다.</p>
                 </div>
 
@@ -116,6 +117,9 @@ function MemberPage() {
                         </div>
                     ))}
                 </div>
+
+                {/* Bottom Scroll Cue */}
+                <ScrollIndicator />
             </section>
 
             {/* 2nd Viewport Section: 활동 부서 Section */}

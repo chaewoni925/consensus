@@ -32,7 +32,7 @@ function Footer() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <img src="/logo.png" alt="CONSENSUS Logo" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
                         <div style={{
-                            fontFamily: "'Space Grotesk', sans-serif",
+                            fontFamily: "'Pretendard', sans-serif",
                             fontWeight: 800,
                             fontSize: '24px',
                             letterSpacing: '-.03em',
@@ -47,7 +47,7 @@ function Footer() {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <span style={{
-                            fontFamily: "'Space Grotesk', sans-serif",
+                            fontFamily: "'Pretendard', sans-serif",
                             fontWeight: 700,
                             fontSize: '15px',
                             color: '#F1F5F9',

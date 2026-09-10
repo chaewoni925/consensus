@@ -85,10 +85,10 @@ function AboutPage() {
                 <SlideUpFade yOffset={50} duration={0.8} style={{ width: '100%', position: 'relative', zIndex: 2 }}>
                     <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: '1100px', margin: '0 auto', padding: 'clamp(32px,5vw,64px) 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', boxSizing: 'border-box' }}>
                         <div style={{ minWidth: 0, textAlign: 'left', maxWidth: '820px' }}>
-                            <div style={{ font: "800 12px pretendard", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '18px', textAlign: 'left' }}>
+                            <div style={{ font: "800 12px 'Pretendard', sans-serif", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '18px', textAlign: 'left' }}>
                               CATHOLIC UNIV. FINANCE SOCIETY
                             </div>
-                            <h1 style={{ margin: 0, fontFamily: "'Space Grotesk', -apple-system, sans-serif", fontWeight: 800, fontSize: 'clamp(40px,7vw,84px)', lineHeight: 1.08, letterSpacing: '-0.6px', background: 'linear-gradient(104deg,#FFFFFF 10%,#9DC4EE 50%,#D1E5FB 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textWrap: 'balance', textAlign: 'left' }}>
+                            <h1 style={{ margin: 0, fontFamily: "'Pretendard', sans-serif", fontWeight: 800, fontSize: 'clamp(40px,7vw,84px)', lineHeight: 1.08, letterSpacing: '-0.6px', background: 'linear-gradient(104deg,#FFFFFF 10%,#9DC4EE 50%,#D1E5FB 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textWrap: 'balance', textAlign: 'left' }}>
                                 One Consensus,<br />Own Consensus
                             </h1>
                         </div>
@@ -139,7 +139,7 @@ function AboutPage() {
                     <SlideUpFade yOffset={35}>
                         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                             <div style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '.25em', color: '#3B82F6', textTransform: 'uppercase' }}>STRUCTURE & NAVIGATION</div>
-                            <h2 style={{ margin: '12px 0 0', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(32px,4.5vw,48px)', letterSpacing: '-.02em', background: 'linear-gradient(104deg, #0C1526 10%, #254065 50%, #5B95D6 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                            <h2 style={{ margin: '12px 0 0', fontFamily: "'Pretendard', sans-serif", fontWeight: 700, fontSize: 'clamp(32px,4.5vw,48px)', letterSpacing: '-.02em', background: 'linear-gradient(104deg, #0C1526 10%, #254065 50%, #5B95D6 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                                 SYSTEM OF CONSENSUS
                             </h2>
                         </div>
@@ -152,7 +152,7 @@ function AboutPage() {
                                     <div className="nav-card-overlay" style={{ background: 'linear-gradient(to bottom, rgba(12, 21, 38, 0.25), rgba(12, 21, 38, 0.65))' }} />
                                     <div className="nav-card-content">
                                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-                                            <span style={{ font: "700 24px 'Space Grotesk',sans-serif", color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '.04em', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+                                            <span style={{ font: "700 24px 'Pretendard', sans-serif", color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: '.04em', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
                                                 {item.title}
                                             </span>
                                             <span style={{ font: "600 20px 'Pretendard',sans-serif", color: '#FFFFFF', textShadow: '0 0 10px rgba(255,255,255,0.8)' }}>→</span>
@@ -191,7 +191,7 @@ function AboutPage() {
                 <div style={{ width: '100%', maxWidth: '1100px', margin: '0 auto', padding: 'clamp(64px, 7vw, 96px) 24px' }}>
                     <SlideUpFade yOffset={35}>
                         <div style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '.2em', color: '#9DC4EE', marginBottom: '10px' }}>CURRICULUM · 5TH COHORT</div>
-                        <h1 style={{ margin: '0 0 6px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(32px,4vw,44px)', color: '#FFFFFF', letterSpacing: '-0.5px' }}>Two Tracks, One Consensus</h1>
+                        <h1 style={{ margin: '0 0 6px', fontFamily: "'Pretendard', sans-serif", fontWeight: 800, fontSize: 'clamp(32px,4vw,44px)', color: '#FFFFFF', letterSpacing: '-0.5px' }}>Two Tracks, One Consensus</h1>
                         <p style={{ margin: '0 0 36px', fontFamily: "'Pretendard',sans-serif", fontWeight: 600, fontSize: 'clamp(17px,2.2vw,22px)', color: 'rgba(255,255,255,0.78)' }}>각자의 분석이 하나의 결론으로</p>
                     </SlideUpFade>
 

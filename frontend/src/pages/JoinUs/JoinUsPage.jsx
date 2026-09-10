@@ -139,35 +139,6 @@ function JoinUsPage() {
                                     <span>공식 지원서 다운로드</span>
                                     <span style={{ fontSize: '15px' }}>↓</span>
                                 </a>
-
-                                {/* Secondary Outline Button */}
-                                <button
-                                    onClick={scrollToFaq}
-                                    style={{
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        gap: '6px',
-                                        padding: '14px 22px',
-                                        borderRadius: '8px',
-                                        background: 'transparent',
-                                        color: '#FFFFFF',
-                                        border: '1px solid rgba(255,255,255,0.25)',
-                                        fontSize: '14px',
-                                        fontWeight: 700,
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s ease'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.borderColor = '#FFFFFF';
-                                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
-                                        e.currentTarget.style.background = 'transparent';
-                                    }}
-                                >
-                                    <span>제출 방법 보기</span>
-                                </button>
                             </div>
                         </div>
 
@@ -209,7 +180,7 @@ function JoinUsPage() {
                                     }}
                                 >
                                     {/* Number Column */}
-                                    <span style={{ fontSize: '13px', fontFamily: 'monospace', fontWeight: 700, color: '#CBD5E1', paddingTop: '2px', flexShrink: 0 }}>
+                                    <span style={{ fontSize: '13px', font:'pretendard', fontWeight: 700, color: '#CBD5E1', paddingTop: '2px', flexShrink: 0 }}>
                                         {step.num}
                                     </span>
 

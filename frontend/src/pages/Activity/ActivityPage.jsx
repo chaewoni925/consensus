@@ -7,6 +7,42 @@ import ScrollIndicator from '../../components/ScrollIndicator';
 function ActivityPage() {
     const STORAGE_KEY = 'consensus_reports_data';
 
+    const INITIAL_FALLBACK_REPORTS = [
+        {
+            id: 'sample-1',
+            title: 'HPSP 기업분석 리포트 (Valuation & DCF)',
+            category: 'COMPANY',
+            reportType: '기업분석 리포트',
+            department: '기업리서치 부',
+            publishDate: '2026-09-10',
+            views: 42,
+            fileUrl: '/Consensus_5th_Application_Form.docx',
+            fileName: 'HPSP_기업분석_리포트.pdf'
+        },
+        {
+            id: 'sample-2',
+            title: '2026 하반기 글로벌 매크로 하우스뷰 (House View)',
+            category: 'MACRO',
+            reportType: 'House View',
+            department: '매크로 컨센서스 부',
+            publishDate: '2026-09-08',
+            views: 28,
+            fileUrl: '/Consensus_5th_Application_Form.docx',
+            fileName: '2026_하반기_HouseView.pdf'
+        },
+        {
+            id: 'sample-3',
+            title: '2026 상반기 학회 모의펀드 투자운용결과보고서',
+            category: 'INVESTMENT_RESULT',
+            reportType: '운용결과 보고서',
+            department: '투자운용 부',
+            publishDate: '2026-09-05',
+            views: 35,
+            fileUrl: '/Consensus_5th_Application_Form.docx',
+            fileName: '모의펀드_운용결과보고서.pdf'
+        }
+    ];
+
     const getInitialReports = () => {
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
@@ -17,7 +53,7 @@ function ActivityPage() {
         } catch (e) {
             console.error('Failed to load local reports:', e);
         }
-        return [];
+        return INITIAL_FALLBACK_REPORTS;
     };
 
     const [activities, setActivities] = useState([]);

@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
   datasource:
     url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQL_DATABASE}
     username: ${MYSQLUSER}
@@ -11,3 +15,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        discord:
+          webhook:
+            url: ${DISCORD_WEBHOOK_URL}
+
+executive:
+  secret-key: ${EXECUTIVE_SECRET_KEY:consensus2024!}

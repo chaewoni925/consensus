@@ -1,4 +1,4 @@
-package com.example.demo.global.exception;
+package com.example.demo.global.config;
 
 import com.example.demo.global.notification.DiscordNotifier;
 import jakarta.servlet.http.HttpServletRequest;

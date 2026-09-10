@@ -77,61 +77,64 @@ function MemberPage() {
     ];
 
     return (
-        <main style={{ maxWidth: '1180px', margin: '0 auto', padding: '160px 24px 130px', background: 'transparent', color: '#FFFFFF' }}>
-            {/* Header Title */}
-            <div style={{ textAlign: 'center', marginBottom: '48px', marginTop: '20px' }}>
-                <div style={{ font: "800 20px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>MEMBER & ORGANIZATION</div>
-                <h2 style={{ margin: '0 0 12px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(28px,4vw,40px)', letterSpacing: '-.02em', color: '#FFFFFF' }}>5기 임원진</h2>
-                <p style={{ margin: '0 auto', maxWidth: '600px', fontSize: '14.5px', lineHeight: 1.7, color: 'rgba(255,255,255,0.72)' }}>CONSENSUS를 이끌어가는 5기 임원진입니다.</p>
-            </div>
+        <main style={{ width: '100%', background: 'transparent', color: '#FFFFFF' }}>
+            {/* 1st Viewport Section: Member Header & Executive List */}
+            <section style={{ minHeight: '100vh', maxWidth: '1240px', margin: '0 auto', padding: '140px 24px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box', borderBottom: '1px solid rgba(255,255,255,0.16)' }}>
+                {/* Header Title */}
+                <div style={{ textAlign: 'center', marginBottom: '48px', marginTop: '5px' }}>
+                    <div style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>MEMBER & ORGANIZATION</div>
+                    <h2 style={{ margin: '0 0 12px', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(28px,4vw,40px)', letterSpacing: '-.02em', color: '#FFFFFF' }}>5기 임원진</h2>
+                    <p style={{ margin: '0 auto', maxWidth: '600px', fontSize: '14.5px', lineHeight: 1.7, color: 'rgba(255,255,255,0.72)' }}>CONSENSUS를 이끌어가는 5기 임원진입니다.</p>
+                </div>
 
-            {/* Executives Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', width: '100%', marginBottom: '90px' }}>
-                {exec.map((m, idx) => (
-                    <div key={idx} style={{ position: 'relative', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', background: 'rgba(255,255,255,0.05)', overflow: 'hidden', padding: '20px' }}>
-                        <div style={{
-                            width: '100%',
-                            aspectRatio: '1 / 1',
-                            borderRadius: '10px',
-                            background: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px dashed rgba(255, 255, 255, 0.2)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'rgba(255,255,255,0.5)',
-                            fontSize: '12px',
-                            marginBottom: '14px'
-                        }}>
-                            Profile Image
+                {/* Executives Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', width: '100%' }}>
+                    {exec.map((m, idx) => (
+                        <div key={idx} style={{ position: 'relative', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', background: 'rgba(255,255,255,0.05)', overflow: 'hidden', padding: '20px' }}>
+                            <div style={{
+                                width: '100%',
+                                aspectRatio: '1 / 1',
+                                borderRadius: '10px',
+                                background: 'rgba(255, 255, 255, 0.05)',
+                                border: '1px dashed rgba(255, 255, 255, 0.2)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'rgba(255,255,255,0.5)',
+                                fontSize: '12px',
+                                marginBottom: '14px'
+                            }}>
+                                Profile Image
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px' }}>
+                                <div style={{ font: "800 16px 'Pretendard',sans-serif", color: '#FFFFFF' }}>{m.name}</div>
+                                <div style={{ font: "600 10px 'Pretendard',sans-serif", color: '#9DC4EE' }}>{m.cohort}</div>
+                            </div>
+                            <div style={{ marginTop: '6px', display: 'inline-flex', padding: '4px 10px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', border: '1px solid rgba(157,196,238,0.3)', font: "700 11px 'Pretendard',sans-serif", color: '#C9E0FA' }}>{m.role}</div>
+                            <div style={{ marginTop: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>{m.major}</div>
                         </div>
+                    ))}
+                </div>
+            </section>
 
-                        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px' }}>
-                            <div style={{ font: "800 16px 'Pretendard',sans-serif", color: '#FFFFFF' }}>{m.name}</div>
-                            <div style={{ font: "600 10px 'JetBrains Mono',monospace", color: '#9DC4EE' }}>{m.cohort}</div>
-                        </div>
-                        <div style={{ marginTop: '6px', display: 'inline-flex', padding: '4px 10px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', border: '1px solid rgba(157,196,238,0.3)', font: "700 11px 'Pretendard',sans-serif", color: '#C9E0FA' }}>{m.role}</div>
-                        <div style={{ marginTop: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>{m.major}</div>
-                    </div>
-                ))}
-            </div>
-
-            {/* 활동 부서 Section (Exact HTML Design) */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.16)', paddingTop: '80px', marginBottom: '90px' }}>
-                <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', marginBottom: '18px' }}>ACTIVITIES</div>
-                <h1 style={{ fontSize: 'clamp(32px,4vw,40px)', fontWeight: 800, letterSpacing: '-0.6px', marginBottom: '16px', color: '#FFFFFF' }}>활동 부서</h1>
+            {/* 2nd Viewport Section: 활동 부서 Section */}
+            <section style={{ minHeight: '100vh', maxWidth: '1240px', margin: '0 auto', padding: '150px 24px 80px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', boxSizing: 'border-box', borderBottom: '1px solid rgba(255,255,255,0.16)' }}>
+                <div style={{ font: "800 12px 'Pretendard',sans-serif", letterSpacing: '4px', color: '#9DC4EE', marginBottom: '16px' }}>ACTIVITIES</div>
+                <h1 style={{ margin: '0 0 16px 0', fontSize: 'clamp(32px,4vw,40px)', fontWeight: 800, letterSpacing: '-0.6px', color: '#FFFFFF' }}>활동 부서</h1>
                 <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.72)', lineHeight: 1.75, whiteSpace: 'normal', marginBottom: '60px' }}>
                     기업·매크로 분석 결과가 투자제안으로 이어지고, 투자심의위원회 의결을 거쳐 Consensus Portfolio에 편입됩니다.
                 </p>
 
                 {/* 3 Department Cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '22px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))', gap: '22px' }}>
                     {depts.map((d, idx) => (
                         <div key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                             <div style={{ height: '3px', width: '100%', background: '#9DC4EE' }} />
                             <div style={{ padding: '26px 24px 28px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                                     <div style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF' }}>{d.name}</div>
-                                    <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '0.5px', padding: '5px 11px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', color: '#C9E0FA', fontFamily: "'JetBrains Mono', monospace" }}>{d.tag}</div>
+                                    <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '0.5px', padding: '5px 11px', borderRadius: '6px', background: 'rgba(157,196,238,0.18)', color: '#C9E0FA', fontFamily: "'Pretendard', sans-serif" }}>{d.tag}</div>
                                 </div>
                                 <ul style={{ listStyle: 'none', margin: '0 0 22px 0', padding: 0 }}>
                                     {d.bullets.map((b, bIdx) => (
@@ -145,7 +148,7 @@ function MemberPage() {
                                     <div style={{ fontSize: '10.5px', fontWeight: 800, letterSpacing: '1.4px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>핵심 산출물</div>
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                         {d.outputs.map((out, oIdx) => (
-                                            <span key={oIdx} style={{ fontSize: '11.5px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)', padding: '6px 12px', borderRadius: '20px' }}>{out}</span>
+                                            <span key={oIdx} style={{ fontSize: '11.5px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)', padding: '6px 12px', borderRadius: '20px', whiteSpace: 'nowrap' }}>{out}</span>
                                         ))}
                                     </div>
                                 </div>
@@ -153,12 +156,12 @@ function MemberPage() {
                         </div>
                     ))}
                 </div>
-            </div>
+            </section>
 
-            {/* Interactive Decision Pipeline Stepper Section */}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.16)', paddingTop: '80px' }}>
-                <div style={{ fontSize: '11.5px', fontWeight: 800, letterSpacing: '3px', color: '#9DC4EE', marginBottom: '10px' }}>DECISION PIPELINE</div>
-                <div style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.4px', marginBottom: '56px', color: '#FFFFFF' }}>분석에서 편입까지, 하나의 흐름</div>
+            {/* 3rd Section: Interactive Decision Pipeline Stepper Section (Compact Auto Height) */}
+            <section style={{ minHeight: 'auto', maxWidth: '1240px', margin: '0 auto', padding: '100px 24px 240px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', boxSizing: 'border-box' }}>
+                <div style={{ fontSize: '11.5px', fontWeight: 800, letterSpacing: '3px', color: '#9DC4EE', marginBottom: '16px' }}>DECISION PIPELINE</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.4px', marginBottom: '32px', color: '#FFFFFF' }}>분석에서 편입까지, 하나의 흐름</div>
 
                 <div style={{ position: 'relative', marginTop: '40px' }}>
                     {/* Connecting Line */}
@@ -244,7 +247,7 @@ function MemberPage() {
                 {/*<div style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '220px' }}>*/}
                 {/*    각 단계에 마우스를 올리면 상세 활동이 나타납니다*/}
                 {/*</div>*/}
-            </div>
+            </section>
         </main>
     );
 }

@@ -1,117 +1,344 @@
 import { useState } from 'react';
 import axiosInstance from '../../api/axiosInstance';
+import ScrollIndicator from '../../components/ScrollIndicator';
 
 function JoinUsPage() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [activeTab, setActiveTab] = useState(0);
+    const [openFaq, setOpenFaq] = useState(0); // Q1 open by default
 
-    const handleSubscribe = async (e) => {
-        e.preventDefault();
-        try {
-            await axiosInstance.post('/api/subscribers', { email });
-            setMessage('구독 완료! 모집 소식을 받아보실 수 있어요.');
-            setEmail('');
-        } catch (error) {
-            setMessage('이미 등록된 이메일이거나 오류가 발생했어요.');
+    const timeline = [
+        { num: '01', title: '모집 공고', desc: '학회 SNS 및 UIC 채널 공고, 지원서 양식 배포', tag: null },
+        { num: '02', title: '서류 접수', desc: '지원서 제출, 접수 확인 회신', tag: null },
+        { num: '03', title: '서류 합격 발표', desc: '개별 문자 및 메일 통보', tag: null },
+        { num: '04', title: '개별 면접', desc: '20분 개별 면접 · 리서치 관심 분야 중심', tag: null },
+        { num: '05', title: '최종 발표 & OT', desc: '최종 합격 통보 후 기수 오리엔테이션 진행', tag: 'FINAL' }
+    ];
+
+    const faqs = [
+        {
+            q: '지원 자격이 어떻게 되나요?',
+            a: (
+                <>
+                    가톨릭대학교 재학·휴학·졸업생이라면 전공·학년 상관없이 모두 지원 가능합니다.<br />
+                    숫자·재무제표를 배우고자 하는 <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>의지</strong>와 <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>팀 프로젝트에 꾸준히 참여할 수 있는지</strong>를 가장 중요하게 봅니다.
+                </>
+            )
+        },
+        {
+            q: '활동 시간과 강도는 어느 정도인가요?',
+            a: (
+                <>
+                    정기활동은 매주 금요일 <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>18:00~20:30(2시간 30분)</strong>이며, 시험 2주 전은 발표, 시험 주는 휴회입니다.<br />
+                    팀 리서치·리포트·매거진 작업까지 포함하면 주당 5~8시간 정도의 시간 투자가 필요합니다.
+                </>
+            )
+        },
+        {
+            q: '금융·회계 지식이 없어도 지원해도 되나요?',
+            a: (
+                <>
+                    <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>가능합니다.</strong> 학기 초에 증권사 리포트 및 DART 이용법, 기초 Valuation 방법론 및 모델링 교육을 진행하고, <br/>선배들이 모델링을 같이 잡아주는 구조입니다. 다만 스스로 공부해보려는 의지가 중요합니다.
+                </>
+            )
+        },
+        {
+            q: '한 학기 동안 어떤 걸 만들어 보나요?',
+            a: (
+                <>
+                    기업리서치부는 기업 분석 리포트 및 Valuation 리포트를, 매크로 컨센서스부는 산업분석 리포트 및 카드뉴스 등을 만듭니다.<br />
+                    이를 바탕으로 학회 펀드 참여, 투자심의위원회 포트폴리오 심의·운용, 투자결과 보고회 발표를 진행합니다.
+                </>
+            )
+        },
+        {
+            q: '금융권 취업과 관련해 실질적으로 어떤 도움이 되나요?',
+            a: (
+                <>
+                    학회에서 사용하는 Financial Modeling 엑셀 툴은 실무에서 사용하는 엑셀 모델링과 매우 밀접합니다.<br />
+                    기업 분석·Valuation·매크로 분석·포트폴리오 운용 경험을 통해 금융·전략 직무 취업 시 강력한 실무 스토리를 만들 수 있습니다.
+                </>
+            )
+        }
+    ];
+
+    const scrollToFaq = () => {
+        const faqElement = document.getElementById('faq-section');
+        if (faqElement) {
+            faqElement.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
-    const tabs = ['개인 가입', '단체 가입', '연합 세션 신청'];
-    const panels = [
-      { title: 'Individual Membership · 개인 가입', desc: '가톨릭대학교 재학생 개인 지원 경로입니다. 서류와 면접을 거쳐 기수 활동에 편성됩니다.' },
-      { title: 'Club Membership · 단체 가입', desc: '신규 투자 동아리의 UIC 등록 프로세스입니다. 활동계획서 심사 후 연합 가입이 승인됩니다.' },
-      { title: 'Joint Session · 연합 세션 신청', desc: '소속 동아리 간 교류 세션 신청입니다. 리서치 발표 교환 및 공동 심의 세션을 운영합니다.' }
-    ];
-
-    const timeline = [
-      { title: '모집 공고', desc: '학회 SNS 및 UIC 채널 공고, 지원서 양식 배포' },
-      { title: '서류 접수', desc: 'PDF 변환 지원서 제출, 접수 확인 회신' },
-      { title: '서류 합격 발표', desc: '개별 문자 및 메일 통보' },
-      { title: '개별 면접', desc: '20분 개별 면접 · 리서치 관심 분야 중심' },
-      { title: '최종 발표 & OT',  desc: '최종 합격 통보 후 기수 오리엔테이션 진행' }
-    ];
-
     return (
-        <main style={{ minHeight: '100vh', padding: '150px 24px 100px', background: 'transparent', color: '#FFFFFF', boxSizing: 'border-box' }}>
-            <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-                    <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '4px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '16px' }}>JOIN US</div>
-                    <h1 style={{ margin: 0, fontFamily: "'Pretendard', sans-serif", fontWeight: 800, fontSize: 'clamp(32px,4vw,44px)', letterSpacing: '-0.6px', color: '#FFFFFF' }}>RECRUITMENT</h1>
-                    <p style={{ margin: '14px auto 0', maxWidth: '620px', fontSize: '15px', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.75)', whiteSpace:'nowrap', wordBreak: 'keep-all' }}>
-                        UIC(전국대학교투자동아리연합회) 가이드라인에 따라 가입 절차 및 신입 기수 모집 알림을 안내해 드립니다.
-                    </p>
+        <main style={{ width: '100%', background: 'transparent', color: '#FFFFFF', fontFamily: "'Pretendard', sans-serif" }}>
+            {/* 1st Viewport Section: Clean Modern Grid Layout */}
+            <section style={{ minHeight: '100vh', maxWidth: '1280px', margin: '0 auto', padding: '120px 32px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box', borderBottom: '1px solid rgba(255,255,255,0.14)' }}>
+                
+                {/* Top Eyebrow Header Line */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.16)', marginBottom: '56px' }}>
+                    <div style={{ font: "800 11px 'Pretendard', sans-serif", letterSpacing: '2.5px', color: '#CBD5E1', textTransform: 'uppercase' }}>
+                        CONSENSUS · JOIN US
+                    </div>
+                    <div style={{ font: "800 11px 'Pretendard', sans-serif", letterSpacing: '2.5px', color: '#CBD5E1', textTransform: 'uppercase' }}>
+                        2026 RECRUITMENT
+                    </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '36px' }}>
-                    {tabs.map((label, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setActiveTab(idx)}
-                            style={{
-                                padding: '10px 22px',
-                                borderRadius: '30px',
-                                font: "600 14px 'Pretendard',sans-serif",
-                                cursor: 'pointer',
-                                color: activeTab === idx ? '#FFFFFF' : 'rgba(255,255,255,0.7)',
-                                background: activeTab === idx ? 'linear-gradient(90deg, rgba(157,196,238,0.25), rgba(157,196,238,0.15))' : 'rgba(255,255,255,0.05)',
-                                border: '1px solid ' + (activeTab === idx ? '#9DC4EE' : 'rgba(255,255,255,0.15)'),
-                                boxShadow: activeTab === idx ? '0 0 16px rgba(157,196,238,0.2)' : 'none',
-                                transition: 'all 0.25s ease'
-                            }}
-                        >
-                            {label}
-                        </button>
-                    ))}
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '24px', alignItems: 'stretch' }}>
-                    {/* Left Panel - Application & Subscription */}
-                    <div style={{ border: '1px solid rgba(255,255,255,0.16)', borderRadius: '16px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', padding: 'clamp(24px,3vw,36px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                {/* Main 2-Column Content Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '64px', alignItems: 'start' }}>
+                    
+                    {/* Left Column: Headline, Description, CTA Buttons & Summary Grid */}
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '100%' }}>
                         <div>
-                            <div style={{ font: "800 20px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '12px' }}>{panels[activeTab].title}</div>
-                            <p style={{ margin: '0 0 28px', fontSize: '14.5px', lineHeight: 1.75, color: 'rgba(255,255,255,0.75)', wordBreak: 'keep-all' }}>{panels[activeTab].desc}</p>
+                            {/* Original Blue JOIN US Eyebrow Badge Restored */}
+                            <div style={{ font: "800 11px 'Pretendard',sans-serif", letterSpacing: '3px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '14px', display: 'inline-block' }}>
+                                JOIN US
+                            </div>
 
-                            <form onSubmit={handleSubscribe} style={{ marginTop: '24px' }}>
-                                <label style={{ display: 'block', font: "600 12px 'Pretendard',sans-serif", color: '#9DC4EE', marginBottom: '8px', letterSpacing: '0.05em' }}>모집 알림 받을 이메일</label>
-                                <div style={{ display: 'flex', gap: '10px' }}>
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="example@email.com"
-                                        required
-                                        style={{ flex: 1, padding: '12px 16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.25)', color: '#FFFFFF', outline: 'none', font: "14px 'Pretendard',sans-serif" }}
-                                    />
-                                    <button type="submit" style={{ padding: '12px 22px', borderRadius: '10px', background: '#9DC4EE', color: '#0C1526', fontWeight: 700, border: 'none', cursor: 'pointer', font: "14px 'Pretendard',sans-serif", transition: 'all 0.2s ease' }}>구독하기</button>
-                                </div>
-                            </form>
-                            {message && <p style={{ marginTop: '12px', fontSize: '13.5px', color: '#9DC4EE', fontWeight: 600 }}>{message}</p>}
+                            {/* Main Large Headline */}
+                            <h1 style={{ margin: '0 0 20px', fontSize: 'clamp(36px, 4.5vw, 54px)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-1px', color: '#FFFFFF' }}>
+                                One Consensus,<br />
+                                Own Consensus
+                            </h1>
+
+                            {/* Subtitle Description */}
+                            <p style={{ margin: '0 0 36px', fontSize: '15px', lineHeight: 1.75, color: '#CBD5E1', maxWidth: '480px' }}>
+                                가톨릭대학교 금융학회 CONSENSUS의 신입 학회원 모집 및 지원 안내입니다.<br />
+                                공식 지원서를 내려받아 작성한 뒤 PDF로 변환해 제출해 주세요.
+                            </p>
+
+                            {/* Action Buttons Row */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginBottom: '56px' }}>
+                                {/* Primary Black Solid Button style (dark theme styled) */}
+                                <a
+                                    href="/Consensus_5th_Application_Form.docx"
+                                    download="Consensus_5기_입회_신청서.docx"
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        padding: '14px 22px',
+                                        borderRadius: '8px',
+                                        background: '#FFFFFF',
+                                        color: '#0D1322',
+                                        fontSize: '14px',
+                                        fontWeight: 800,
+                                        textDecoration: 'none',
+                                        transition: 'all 0.2s ease',
+                                        boxShadow: '0 4px 14px rgba(255,255,255,0.15)'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = '#E2E8F0';
+                                        e.currentTarget.style.transform = 'translateY(-1px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = '#FFFFFF';
+                                        e.currentTarget.style.transform = 'none';
+                                    }}
+                                >
+                                    <span>공식 지원서 다운로드</span>
+                                    <span style={{ fontSize: '15px' }}>↓</span>
+                                </a>
+
+                                {/* Secondary Outline Button */}
+                                <button
+                                    onClick={scrollToFaq}
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        padding: '14px 22px',
+                                        borderRadius: '8px',
+                                        background: 'transparent',
+                                        color: '#FFFFFF',
+                                        border: '1px solid rgba(255,255,255,0.25)',
+                                        fontSize: '14px',
+                                        fontWeight: 700,
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = '#FFFFFF';
+                                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                                        e.currentTarget.style.background = 'transparent';
+                                    }}
+                                >
+                                    <span>제출 방법 보기</span>
+                                </button>
+                            </div>
                         </div>
 
-                        <div style={{ marginTop: '36px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
-                            <a href={`${import.meta.env.VITE_API_BASE_URL || ''}/api/join-us/form`} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', borderRadius: '10px', background: 'rgba(157,196,238,0.14)', color: '#FFFFFF', border: '1px solid rgba(157,196,238,0.3)', textDecoration: 'none', fontWeight: 600, fontSize: '14px', transition: 'all 0.25s ease' }}>
-                                📥 공식 지원서 다운로드
-                            </a>
+                        {/* Bottom 3-Cell Info Table Grid */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', overflow: 'hidden' }}>
+                            <div style={{ padding: '16px 18px', borderRight: '1px solid rgba(255,255,255,0.16)' }}>
+                                <div style={{ fontSize: '11px', fontWeight: 800, color: '#CBD5E1', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>FORMAT</div>
+                                <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>Word → PDF</div>
+                            </div>
+                            <div style={{ padding: '16px 18px', borderRight: '1px solid rgba(255,255,255,0.16)' }}>
+                                <div style={{ fontSize: '11px', fontWeight: 800, color: '#CBD5E1', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>FILE NAME</div>
+                                <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>이름_지원서.pdf</div>
+                            </div>
+                            <div style={{ padding: '16px 18px' }}>
+                                <div style={{ fontSize: '11px', fontWeight: 800, color: '#CBD5E1', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>INTERVIEW</div>
+                                <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#FFFFFF' }}>개별 20분</div>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Right Panel - Timeline */}
-                    <div style={{ border: '1px solid rgba(255,255,255,0.16)', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(10px)', padding: 'clamp(24px,3vw,36px)' }}>
-                        <div style={{ font: "800 12px 'JetBrains Mono',monospace", letterSpacing: '3px', color: '#9DC4EE', textTransform: 'uppercase', marginBottom: '24px' }}>RECRUITING TIMELINE</div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            {timeline.map((s, idx) => (
-                                <div key={idx} style={{ borderLeft: '2px solid #9DC4EE', paddingLeft: '16px', position: 'relative' }}>
-                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
-                                        <span style={{ font: "700 15px 'Pretendard',sans-serif", color: '#FFFFFF' }}>{s.title}</span>
+                    {/* Right Column: Clean Minimalist Timeline List */}
+                    <div style={{ paddingLeft: 'clamp(0px, 2vw, 24px)' }}>
+                        {/* Section Header */}
+                        <div style={{ font: "800 11px 'Pretendard', sans-serif", letterSpacing: '2px', color: '#CBD5E1', textTransform: 'uppercase', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.16)', marginBottom: '8px' }}>
+                            RECRUITING TIMELINE
+                        </div>
+
+                        {/* List Items with Divider Lines */}
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            {timeline.map((step, idx) => (
+                                <div
+                                    key={idx}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'flex-start',
+                                        gap: '20px',
+                                        padding: '20px 0',
+                                        borderBottom: '1px solid rgba(255,255,255,0.1)'
+                                    }}
+                                >
+                                    {/* Number Column */}
+                                    <span style={{ fontSize: '13px', fontFamily: 'monospace', fontWeight: 700, color: '#CBD5E1', paddingTop: '2px', flexShrink: 0 }}>
+                                        {step.num}
+                                    </span>
+
+                                    {/* Content Column */}
+                                    <div style={{ flexGrow: 1 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#FFFFFF' }}>
+                                                {step.title}
+                                            </h3>
+                                            {step.tag && (
+                                                <span style={{ padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 800, background: '#FFFFFF', color: '#0D1322', letterSpacing: '0.5px' }}>
+                                                    {step.tag}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <p style={{ margin: 0, fontSize: '13.5px', color: '#CBD5E1', lineHeight: 1.5 }}>
+                                            {step.desc}
+                                        </p>
                                     </div>
-                                    <div style={{ marginTop: '6px', fontSize: '13.5px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{s.desc}</div>
                                 </div>
                             ))}
                         </div>
+
+                        {/* Timeline Footer Note */}
+                        <div style={{ marginTop: '24px', fontSize: '12.5px', color: '#CBD5E1' }}>
+                            * 세부 일정은 진행 상황에 따라 변경될 수 있습니다.
+                        </div>
                     </div>
+
                 </div>
-            </div>
+
+                {/* Bottom Scroll Cue */}
+                <div style={{ textAlign: 'center', marginTop: '48px', cursor: 'pointer' }} onClick={scrollToFaq}>
+                    <ScrollIndicator />
+                </div>
+            </section>
+
+            {/* 2nd Viewport Section: FAQ Section */}
+            <section id="faq-section" style={{ minHeight: '100vh', maxWidth: '960px', margin: '0 auto', padding: '100px 24px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
+                <div style={{ font: "800 12px 'Pretendard',sans-serif", letterSpacing: '4px', color: '#9DC4EE' }}>FAQ</div>
+                <h2 style={{ fontSize: 'clamp(28px,4vw,40px)', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '14px', color: '#FFFFFF' }}>자주 묻는 질문</h2>
+                <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, maxWidth: '560px', marginBottom: '40px' }}>
+                    Consensus 지원을 고민하고 있다면, 아래 질문들을 먼저 확인해보세요.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {faqs.map((faq, idx) => {
+                        const isOpen = openFaq === idx;
+                        return (
+                            <div
+                                key={idx}
+                                style={{
+                                    borderTop: '1px solid rgba(255,255,255,0.16)',
+                                    borderBottom: idx === faqs.length - 1 ? '1px solid rgba(255,255,255,0.16)' : 'none'
+                                }}
+                            >
+                                <div
+                                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        gap: '20px',
+                                        padding: '26px 4px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '14px' }}>
+                                        <span style={{ fontSize: '13px', fontWeight: 800, color: '#9DC4EE', flexShrink: 0 }}>Q{idx + 1}</span>
+                                        <span style={{ fontSize: '16.5px', fontWeight: 700, color: '#FFFFFF' }}>{faq.q}</span>
+                                    </div>
+                                    <div style={{
+                                        flexShrink: 0,
+                                        width: '22px',
+                                        height: '22px',
+                                        border: '1px solid rgba(255,255,255,0.35)',
+                                        borderRadius: '50%',
+                                        position: 'relative',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <span style={{
+                                            position: 'absolute',
+                                            width: '9px',
+                                            height: '1.4px',
+                                            background: '#FFFFFF'
+                                        }} />
+                                        {!isOpen && (
+                                            <span style={{
+                                                position: 'absolute',
+                                                width: '1.4px',
+                                                height: '9px',
+                                                background: '#FFFFFF'
+                                            }} />
+                                        )}
+                                    </div>
+                                </div>
+                                {isOpen && (
+                                    <div style={{
+                                        padding: '0 4px 30px 40px',
+                                        fontSize: '14px',
+                                        lineHeight: 1.85,
+                                        color: 'rgba(255,255,255,0.78)',
+                                        maxWidth: '780px'
+                                    }}>
+                                        {faq.a}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <div style={{
+                    marginTop: '60px',
+                    paddingTop: '32px',
+                    borderTop: '1px solid rgba(255,255,255,0.16)',
+                    fontSize: '13px',
+                    color: 'rgba(255,255,255,0.55)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '12px'
+                }}>
+                    <span>더 궁금한 점이 있다면 consensus1441@gmail.com으로 문의해주세요.</span>
+                    <span>CONSENSUS · SINCE 2024</span>
+                </div>
+            </section>
         </main>
     );
 }

@@ -7,6 +7,7 @@ import JoinUsPage from './pages/JoinUs/JoinUsPage.jsx';
 import ContactPage from './pages/Contact/ContactPage.jsx';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
 
   return (
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<AboutPage />} />

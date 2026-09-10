@@ -145,7 +145,7 @@ function InteractiveLogo3D() {
             </span>
             <span
               style={{
-                font: "600 11px 'JetBrains Mono', monospace",
+                font: "600 11px 'Pretendard', sans-serif",
                 letterSpacing: '.18em',
                 color: isHovered ? '#10B981' : '#94A3B8',
                 textTransform: 'uppercase',
@@ -176,7 +176,7 @@ function InteractiveLogo3D() {
             position: 'absolute',
             bottom: '16px',
             right: '20px',
-            font: "500 10px 'JetBrains Mono', monospace",
+            font: "500 10px 'Pretendard', sans-serif",
             color: 'rgba(148, 163, 184, 0.4)',
             letterSpacing: '.1em',
             transform: 'translateZ(20px)'

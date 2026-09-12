@@ -9,11 +9,13 @@ spring:
     password: ${POSTGRES_PASSWORD:${SUPABASE_PASSWORD:p0505251216#}}
     driver-class-name: org.postgresql.Driver
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         discord:
           webhook:

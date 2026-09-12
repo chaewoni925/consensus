@@ -4,10 +4,10 @@ spring:
       max-file-size: 50MB
       max-request-size: 50MB
   datasource:
-    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQL_DATABASE}
-    username: ${MYSQLUSER}
-    password: ${MYSQLPASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://${POSTGRES_HOST:${SUPABASE_HOST:db.wdhcvudeqkkxrfdvxgkj.supabase.co}}:${POSTGRES_PORT:5432}/${POSTGRES_DB:postgres}?sslmode=require
+    username: ${POSTGRES_USER:${SUPABASE_USER:postgres}}
+    password: ${POSTGRES_PASSWORD:${SUPABASE_PASSWORD:p0505251216#}}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update

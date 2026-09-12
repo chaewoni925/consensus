@@ -17,7 +17,7 @@ spring:
         format_sql: true
         discord:
           webhook:
-            url: ${DISCORD_WEBHOOK_URL}
+            url: ${DISCORD_WEBHOOK_URL:}
 
 executive:
   secret-key: ${EXECUTIVE_SECRET_KEY:consensus2024!}

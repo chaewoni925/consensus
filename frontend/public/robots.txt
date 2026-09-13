@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cuk-consensus.vercel.app/sitemap.xml

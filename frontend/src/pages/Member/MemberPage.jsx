@@ -97,15 +97,18 @@ function MemberPage() {
                                 aspectRatio: '1 / 1',
                                 borderRadius: '10px',
                                 background: 'rgba(255, 255, 255, 0.05)',
-                                border: '1px dashed rgba(255, 255, 255, 0.2)',
+                                border: '1px solid rgba(255, 255, 255, 0.12)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: 'rgba(255,255,255,0.5)',
-                                fontSize: '12px',
+                                overflow: 'hidden',
                                 marginBottom: '14px'
                             }}>
-                                Profile Image
+                                <img
+                                    src="/default_profile.png"
+                                    alt={m.name}
+                                    style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '16px', boxSizing: 'border-box' }}
+                                />
                             </div>
 
                             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px' }}>

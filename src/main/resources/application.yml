@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:${SUPABASE_HOST:db.wdhcvudeqkkxrfdvxgkj.supabase.co}}:${POSTGRES_PORT:5432}/${POSTGRES_DB:postgres}?sslmode=require
     username: ${POSTGRES_USER:${SUPABASE_USER:postgres}}
-    password: ${POSTGRES_PASSWORD:${SUPABASE_PASSWORD:p0505251216#}}
+    password: ${POSTGRES_PASSWORD:${SUPABASE_PASSWORD:}}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -17,9 +17,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        discord:
-          webhook:
-            url: ${DISCORD_WEBHOOK_URL:}
+
+discord:
+  webhook:
+    url: ${DISCORD_WEBHOOK_URL:}
 
 executive:
-  secret-key: ${EXECUTIVE_SECRET_KEY:consensus2024!}
+  secret-key: ${EXECUTIVE_SECRET_KEY:}

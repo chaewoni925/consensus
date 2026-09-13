@@ -120,10 +120,11 @@ function ActivityPage() {
         let authenticated = isExecutiveAuth;
 
         if (!authenticated) {
+            const expectedKey = import.meta.env.VITE_EXECUTIVE_SECRET_KEY;
             const inputKey = window.prompt('🔒 운영진 전용 삭제\n리포트를 삭제하려면 운영진 비밀번호를 입력해 주세요:');
             if (inputKey === null) return; // User cancelled prompt
-            if (inputKey.trim() !== 'consensus2024!') {
-                alert('❌ 운영진 비밀번호가 올바르지 않습니다.');
+            if (!expectedKey || inputKey.trim() !== expectedKey.trim()) {
+                alert('❌ 운영진 비밀번호가 올바르지 않거나 환경변수가 설정되지 않았습니다.');
                 return;
             }
             sessionStorage.setItem('consensus_exec_auth', 'true');
@@ -155,10 +156,11 @@ function ActivityPage() {
 
         let authenticated = isExecutiveAuth;
         if (!authenticated) {
+            const expectedKey = import.meta.env.VITE_EXECUTIVE_SECRET_KEY;
             const inputKey = window.prompt('🔒 운영진 전용 삭제\n리포트를 삭제하려면 운영진 비밀번호를 입력해 주세요:');
             if (inputKey === null) return;
-            if (inputKey.trim() !== 'consensus2024!') {
-                alert('❌ 운영진 비밀번호가 올바르지 않습니다.');
+            if (!expectedKey || inputKey.trim() !== expectedKey.trim()) {
+                alert('❌ 운영진 비밀번호가 올바르지 않거나 환경변수가 설정되지 않았습니다.');
                 return;
             }
             sessionStorage.setItem('consensus_exec_auth', 'true');

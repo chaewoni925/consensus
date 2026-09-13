@@ -55,12 +55,13 @@ function ReportUploadModal({ isOpen, onClose, onSuccess, reports = [], onDeleteR
 
   const handleAuthSubmit = (e) => {
     e.preventDefault();
-    if (executiveKey.trim() === 'consensus2024!') {
+    const expectedKey = import.meta.env.VITE_EXECUTIVE_SECRET_KEY;
+    if (expectedKey && executiveKey.trim() === expectedKey.trim()) {
       setIsAuth(true);
       setAuthError('');
       sessionStorage.setItem('consensus_exec_auth', 'true');
     } else {
-      setAuthError('운영진 비밀번호가 올바르지 않습니다.');
+      setAuthError('운영진 비밀번호가 올바르지 않거나 환경변수가 설정되지 않았습니다.');
     }
   };
 

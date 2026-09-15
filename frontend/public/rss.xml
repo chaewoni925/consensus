@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+  <title>Consensus | 가톨릭대학교 금융학회</title>
+  <link>https://cuk-consensus.vercel.app</link>
+  <description>가톨릭대학교 금융학회 Consensus(컨센서스) 공식 웹사이트입니다. One Consensus, Own Consensus.</description>
+  <language>ko</language>
+  <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+  <item>
+    <title>Consensus | 가톨릭대학교 금융학회</title>
+    <link>https://cuk-consensus.vercel.app/</link>
+    <description>One Consensus, Own Consensus. 가톨릭대학교 공식 금융학회 Consensus입니다.</description>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Consensus 학회원 소개</title>
+    <link>https://cuk-consensus.vercel.app/members</link>
+    <description>Consensus 학회원 목록 및 임원진 소개</description>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Consensus 커리큘럼 및 활동</title>
+    <link>https://cuk-consensus.vercel.app/activities</link>
+    <description>Consensus 주요 활동 내용 및 세션 소개</description>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Consensus 신입 학회원 모집 (Recruitment)</title>
+    <link>https://cuk-consensus.vercel.app/join-us</link>
+    <description>Consensus 신입 학회원 지원 및 모집 일정 안내</description>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+  </item>
+</channel>
+</rss>

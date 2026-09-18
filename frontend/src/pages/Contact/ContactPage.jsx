@@ -57,14 +57,20 @@ function ContactPage() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '60px' }}>
                     {contacts.map((c, idx) => (
-                        <div key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', padding: '24px' }}>
+                        <div key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '14px', padding: '24px', display: 'flex', flexDirection: 'column' }}>
                             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', font: "700 11px 'Pretendard', monospace, sans-serif", letterSpacing: '1.5px', color: '#60A5FA', textTransform: 'uppercase', marginBottom: '14px' }}>
                                 {c.icon}
                                 <span>{c.category}</span>
                             </div>
-                            <div style={{ font: "700 18px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '60px' }}>{c.who}</div>
-                            <div style={{ font: "600 15px 'Pretendard', sans-serif", color: '#9DC4EE', marginBottom: '12px', wordBreak: 'break-all' }}>{c.value}</div>
-                            <div style={{ fontSize: '13.5px', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '14px', marginTop: '14px' }}>{c.note}</div>
+                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+                                <div style={{ font: "700 18px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '12px' }}>{c.who}</div>
+                                {c.value && (
+                                    <div style={{ font: "600 15px 'Pretendard', sans-serif", color: '#9DC4EE', marginBottom: '14px', wordBreak: 'break-all' }}>
+                                        {c.value}
+                                    </div>
+                                )}
+                            </div>
+                            <div style={{ fontSize: '13.5px', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '14px', marginTop: '16px' }}>{c.note}</div>
                         </div>
                     ))}
                 </div>

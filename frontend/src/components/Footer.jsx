@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const CONTACT_INFO = {
     cafeUrl: "https://cafe.naver.com/cukconsensus",
     instagramUrl: "https://www.instagram.com/cuk_consensus",
-    email: "mailto:consensus.cuk@gmail.com",
+    email: "mailto:consensus1441@gmail.com",
 };
 
 function Footer() {

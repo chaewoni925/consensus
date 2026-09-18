@@ -2,7 +2,7 @@ const CONTACT_INFO = {
     cafeUrl: "https://cafe.naver.com/cukconsensus",
     instagramUrl: "https://www.instagram.com/cuk_consensus",
     kakaoOpenChatUrl: "https://open.kakao.com/",
-    email: "consensus.cuk@gmail.com",
+    email: "consensus1441@gmail.com",
 };
 
 function ContactPage() {
@@ -28,7 +28,7 @@ function ContactPage() {
                 </svg>
             ),
             who: '대외 소통 문의',
-            value: '@consensus_cuk',
+            value: '@cuk_consensus',
             note: 'UIC 연합세션 및 외부 동아리 교류 제안'
         },
         {
@@ -40,7 +40,6 @@ function ContactPage() {
                 </svg>
             ),
             who: '가톨릭대학교 성심교정',
-            value: '학생회관 세미나실',
             note: '경기도 부천시 지봉로 43 · 정기 세션 금요일 18시'
         }
     ];

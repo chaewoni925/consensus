@@ -110,16 +110,25 @@ function AboutPage() {
                             </h1>
 
                             <p style={{ fontSize: '15.5px', lineHeight: 1.9, color: 'rgba(255,255,255,0.85)', marginBottom: '22px', wordBreak: 'keep-all' }}>
-                                Consensus는 2024년 가톨릭대학교에서 결성된 대학생 투자·리서치 학회입니다. UIC(전국대학교투자동아리연합회) 소속 가톨릭대학교 지부로서 <br/> 창설 이후 매 학기 신입 기수를 맞이하며 현재 5기까지 이어져 왔고, 누적 회원 수는 66명에 이릅니다.
+                                Consensus는 2024년 창설된 가톨릭대학교 대학생 금융학회입니다.<br/>
+                                금융투자협회 전국대학생투자동아리 연합회(UIC) 소속으로, 매 학기 금융 실무 역량을 쌓는 활동을 이어가고 있습니다.
                             </p>
 
                             <p style={{ fontSize: '15.5px', lineHeight: 1.9, color: 'rgba(255,255,255,0.85)', marginBottom: '22px', wordBreak: 'keep-all' }}>
-                                학회의 중심에는 <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>기업리서치(Valuation)</strong>, <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>매크로 환경 분석</strong>, <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>모의투자운용</strong>이라는 세 가지 활동 축이 있습니다. 산업 섹터별 기업을 선정해 <br/> 적정주가와 투자포인트를 도출하는 기업리서치 부, 거시경제를 분석해 학회 자체의 House-View를 세우고 모의펀드를 운용하는 매크로 컨센서스 부. <br/> 그리고 두 부서의 투자제안을 검토·의결하는 투자심의위원회까지 —
-                                 실제 투자 조직의 의사결정 구조를 학회 안에서 그대로 경험합니다.
+                                기업가치평가(Valuation), 거시경제 환경분석(Macro), 모의투자운용(Portfolio)을 핵심 활동으로 삼아 <br/>
+                                금융권 실무에 가까운 리서치 및 의사결정 과정을 경험할 수 있는 환경을 제공합니다.
+                            </p>
+
+                            <p style={{ fontSize: '15.5px', lineHeight: 1.9, color: 'rgba(255,255,255,0.85)', marginBottom: '22px', wordBreak: 'keep-all' }}>
+                                산업별 기업 분석을 통해 적정주가와 투자포인트를 도출하는 기업리서치부<br/>
+                                거시경제 환경 분석을 바탕으로 학회 고유의 House View를 수립하며 투자 포트폴리오를 운용하는 매크로 컨센서스부<br/>
+                                그리고 각 부서의 투자 제안을 검토·의결하는 투자심의위원회까지<br/>
+                                투자 아이디어 발굴부터 포트폴리오 편입과 성과 점검에 이르는 의사결정 전 과정을 경험할 수 있습니다.
                             </p>
 
                             <p style={{ fontSize: '15.5px', lineHeight: 1.9, color: 'rgba(255,255,255,0.85)', marginBottom: '28px', wordBreak: 'keep-all' }}>
-                                아직 짧은 역사지만, 은행·증권사·자산운용사·평가사 등 금융권에 재직 중인 선배들과의 네트워크를 꾸준히 쌓아가며 <br/>학회 활동이 현장과 이어질 수 있도록 기반을 다지고 있습니다.
+                                은행, 증권사, 자산운용사, 신용평가사 등 금융권 현직 선배들과의 네트워크를 지속적으로 확대하며,<br/>
+                                학문적 역량을 실무 경험으로 전환하고, 금융 커리어 기회로 연결될 수 있는 기반을 만들어가고 있습니다.
                             </p>
 
                             <div style={{ display: 'flex', alignItems: 'center', gap: '22px', padding: '16px 0 8px', margin: '24px 0 0' }}>

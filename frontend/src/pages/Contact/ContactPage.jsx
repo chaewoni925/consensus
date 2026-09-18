@@ -62,7 +62,7 @@ function ContactPage() {
                                 {c.icon}
                                 <span>{c.category}</span>
                             </div>
-                            <div style={{ font: "700 18px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '8px' }}>{c.who}</div>
+                            <div style={{ font: "700 18px 'Pretendard',sans-serif", color: '#FFFFFF', marginBottom: '60px' }}>{c.who}</div>
                             <div style={{ font: "600 15px 'Pretendard', sans-serif", color: '#9DC4EE', marginBottom: '12px', wordBreak: 'break-all' }}>{c.value}</div>
                             <div style={{ fontSize: '13.5px', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '14px', marginTop: '14px' }}>{c.note}</div>
                         </div>
